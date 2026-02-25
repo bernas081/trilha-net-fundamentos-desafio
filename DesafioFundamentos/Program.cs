@@ -1,25 +1,44 @@
 ﻿using DesafioFundamentos.Models;
 
-// Coloca o encoding para UTF8 para exibir acentuação
+// Define o encoding como UTF-8 para permitir exibição correta de acentuação no console
 Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-decimal precoInicial = 0;
-decimal precoPorHora = 0;
+// Configuração inicial do sistema
 
-Console.WriteLine("Seja bem vindo ao sistema de estacionamento!\n" +
-                  "Digite o preço inicial:");
-precoInicial = Convert.ToDecimal(Console.ReadLine());
 
-Console.WriteLine("Agora digite o preço por hora:");
-precoPorHora = Convert.ToDecimal(Console.ReadLine());
+// Solicita o preço inicial do estacionamento com validação
+decimal precoInicial;
+while (true)
+{
+    Console.WriteLine("Seja bem-vindo ao sistema de estacionamento!\nDigite o preço inicial:");
 
-// Instancia a classe Estacionamento, já com os valores obtidos anteriormente
+    if (decimal.TryParse(Console.ReadLine(), out precoInicial) && precoInicial >= 0)
+        break;
+
+    Console.WriteLine("Valor inválido. Digite um número válido.");
+}
+
+// Solicita o preço por hora com validação
+decimal precoPorHora;
+while (true)
+{
+    Console.WriteLine("Agora digite o preço por hora:");
+
+    if (decimal.TryParse(Console.ReadLine(), out precoPorHora) && precoPorHora >= 0)
+        break;
+
+    Console.WriteLine("Valor inválido. Digite um número válido.");
+}
+
+// Instancia o objeto responsável por gerenciar as operações do estacionamento
 Estacionamento es = new Estacionamento(precoInicial, precoPorHora);
 
-string opcao = string.Empty;
+// Controla a execução do menu principal
 bool exibirMenu = true;
 
-// Realiza o loop do menu
+
+// Loop principal do sistema
+
 while (exibirMenu)
 {
     Console.Clear();
@@ -52,8 +71,11 @@ while (exibirMenu)
             break;
     }
 
-    Console.WriteLine("Pressione uma tecla para continuar");
+    Console.WriteLine("\nPressione ENTER para continuar");
     Console.ReadLine();
 }
 
-Console.WriteLine("O programa se encerrou");
+Console.WriteLine("O programa foi encerrado com sucesso.");
+
+
+// Feito por Bernas
